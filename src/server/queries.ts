@@ -18,3 +18,5 @@ export async function getTasks(id: number) {
 
   return tasks;
 }
+
+export async function complete(id: number) {}

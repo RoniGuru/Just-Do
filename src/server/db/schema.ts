@@ -2,6 +2,7 @@
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
 import { sql } from "drizzle-orm";
+
 import {
   index,
   integer,
@@ -9,6 +10,7 @@ import {
   serial,
   timestamp,
   varchar,
+  boolean,
 } from "drizzle-orm/pg-core";
 
 /**
@@ -24,6 +26,7 @@ export const goals = createTable(
   {
     id: serial("id").primaryKey(),
     name: varchar("name", { length: 256 }),
+    isCompleted: boolean("is_completed").default(false).notNull(),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
@@ -42,6 +45,7 @@ export const tasks = createTable("task", {
     .references(() => goals.id)
     .notNull(),
   name: varchar("name", { length: 256 }),
+  isCompleted: boolean("is_completed").default(false).notNull(),
   createdAt: timestamp("created_at", { withTimezone: true })
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
