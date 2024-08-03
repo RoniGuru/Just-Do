@@ -1,5 +1,12 @@
 import { getGoal, getTasks } from "~/server/queries";
-import { Checkbox } from "~/components/ui/checkbox";
+import Task from "../app/_components/Task";
+import { taskComplete } from "~/server/queries";
+
+async function toggleTask(id: number, isCompleted: boolean) {
+  "use server";
+
+  taskComplete(id, isCompleted);
+}
 
 export default async function FullPageGoalView(props: { goalId: string }) {
   const idAsNumber = Number(props.goalId);
@@ -15,17 +22,7 @@ export default async function FullPageGoalView(props: { goalId: string }) {
         <div className="text-2xl">{goal.name}</div>
         <div>
           {tasks.map((task) => (
-            <div
-              key={task.id}
-              className="flex items-center justify-center gap-2"
-            >
-              <Checkbox
-                aria-label="Toggle bold"
-                id={`check ` + task.id}
-                checked={task.isCompleted}
-              />
-              <label htmlFor={`check ` + task.id}> {task.name}</label>
-            </div>
+            <Task task={task} key={task.id} toggleTask={toggleTask} />
           ))}
         </div>
       </div>

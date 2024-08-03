@@ -25,7 +25,7 @@ export const goals = createTable(
   "goal",
   {
     id: serial("id").primaryKey(),
-    name: varchar("name", { length: 256 }),
+    name: varchar("name", { length: 256 }).notNull(),
     isCompleted: boolean("is_completed").default(false).notNull(),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
@@ -44,7 +44,7 @@ export const tasks = createTable("task", {
   goalId: integer("goal_id")
     .references(() => goals.id)
     .notNull(),
-  name: varchar("name", { length: 256 }),
+  name: varchar("name", { length: 256 }).notNull(),
   isCompleted: boolean("is_completed").default(false).notNull(),
   createdAt: timestamp("created_at", { withTimezone: true })
     .default(sql`CURRENT_TIMESTAMP`)
