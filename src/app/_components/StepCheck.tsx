@@ -1,7 +1,7 @@
 "use client";
-import { Checkbox } from "~/components/ui/checkbox";
+import { Checkbox } from "./ui/checkbox";
 import { useState } from "react";
-import { Task } from "~/app/_components/PageClient";
+import { Task } from "./HomePageClient";
 
 interface TaskProps {
   task: Task;

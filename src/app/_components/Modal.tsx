@@ -1,7 +1,7 @@
-import StepCheck from "~/components/StepCheck";
+import StepCheck from "~/app/_components/StepCheck";
 
 import { IoIosCloseCircle } from "react-icons/io";
-import { Step, Task } from "./PageClient";
+import { Step, Task } from "./HomePageClient";
 
 interface props {
   task: Task;
