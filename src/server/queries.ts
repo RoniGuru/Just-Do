@@ -1,10 +1,10 @@
 import "server-only";
 import { db } from "./db";
 import { eq } from "drizzle-orm/expressions";
-import { tasks } from "./db/schema";
+import { steps } from "./db/schema";
 
-export async function getGoal(id: number) {
-  const goal = await db.query.goals.findFirst({
+export async function getTask(id: number) {
+  const goal = await db.query.tasks.findFirst({
     where: (model, { eq }) => eq(model.id, id),
   });
 
@@ -13,14 +13,14 @@ export async function getGoal(id: number) {
   return goal;
 }
 
-export async function getTasks(id: number) {
-  const tasks = await db.query.tasks.findMany({
-    where: (model, { eq }) => eq(model.goalId, id),
+export async function getSteps(id: number) {
+  const tasks = await db.query.steps.findMany({
+    where: (model, { eq }) => eq(model.taskId, id),
   });
 
   return tasks;
 }
 
-export async function taskComplete(id: number, isCompleted: boolean) {
-  await db.update(tasks).set({ isCompleted }).where(eq(tasks.id, id));
+export async function stepComplete(id: number, isCompleted: boolean) {
+  await db.update(steps).set({ isCompleted }).where(eq(steps.id, id));
 }

@@ -21,8 +21,8 @@ import {
  */
 export const createTable = pgTableCreator((name) => `just-do_${name}`);
 
-export const goals = createTable(
-  "goal",
+export const tasks = createTable(
+  "task",
   {
     id: serial("id").primaryKey(),
     name: varchar("name", { length: 256 }).notNull(),
@@ -39,10 +39,10 @@ export const goals = createTable(
   }),
 );
 
-export const tasks = createTable("task", {
+export const steps = createTable("step", {
   id: serial("id").primaryKey(),
-  goalId: integer("goal_id")
-    .references(() => goals.id)
+  taskId: integer("task_id")
+    .references(() => tasks.id)
     .notNull(),
   name: varchar("name", { length: 256 }).notNull(),
   isCompleted: boolean("is_completed").default(false).notNull(),

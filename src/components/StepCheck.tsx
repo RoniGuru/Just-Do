@@ -1,31 +1,27 @@
 "use client";
 import { Checkbox } from "~/components/ui/checkbox";
 import { useState } from "react";
+import { Task } from "~/app/_components/PageClient";
 
 interface TaskProps {
-  task: {
-    id: number;
-    name: string;
-    isCompleted: boolean;
-    createdAt: Date;
-    updatedAt: Date | null;
-    goalId: number;
-  };
+  task: Task;
 
-  toggleTask: (id: number, isCompleted: boolean) => void;
+  toggleTask: ((id: number, isCompleted: boolean) => void) | null;
 }
 
-function Task({ task, toggleTask }: TaskProps) {
+function StepCheck({ task, toggleTask }: TaskProps) {
   const [complete, setCompleted] = useState<boolean>(task.isCompleted);
   return (
-    <div key={task.id} className="flex items-center justify-center gap-2">
+    <div key={task.id} className="flex items-center gap-2">
       <Checkbox
         aria-label="Toggle task completion"
         id={`check ` + task.id}
         checked={complete}
         onCheckedChange={() => {
-          toggleTask(task.id, !task.isCompleted);
-          setCompleted(!complete);
+          if (toggleTask) {
+            toggleTask(task.id, !task.isCompleted);
+            setCompleted(!complete);
+          }
         }}
       />
       <label htmlFor={`check ` + task.id}> {task.name}</label>
@@ -33,4 +29,4 @@ function Task({ task, toggleTask }: TaskProps) {
   );
 }
 
-export default Task;
+export default StepCheck;
