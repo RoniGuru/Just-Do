@@ -9,6 +9,7 @@ import { Task } from "../../lib/features/task/taskSlice";
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 import { useEffect } from "react";
 import { fetchTasks } from "../../lib/features/task/taskSlice";
+import { fetchSteps } from "~/lib/features/step/stepSlice";
 
 const HomePageClient = () => {
   const dispatch = useAppDispatch();
@@ -17,6 +18,7 @@ const HomePageClient = () => {
 
   useEffect(() => {
     dispatch(fetchTasks());
+    dispatch(fetchSteps());
   }, []);
 
   const [currentTask, setCurrentTask] = useState<Task | null>(null);
@@ -34,23 +36,24 @@ const HomePageClient = () => {
               {task.name}
             </h1>
             <div className="custom-scrollbar my-4 flex max-h-64 flex-col justify-start gap-2 overflow-y-auto">
-              {steps.map((step) => (
-                <StepCheck task={task} toggleTask={null} key={task.id} />
-              ))}
+              {steps
+                .filter((step) => step.taskId === task.id)
+                .map((step) => (
+                  <StepCheck step={step} key={step.id} />
+                ))}
             </div>
           </div>
         ))}
       </div>
-      {/* <CreateTaskForm createTask={createTask} tasks={tasks} />
+      {/* <CreateTaskForm createTask={createTask} tasks={tasks} /> */}
 
       {currentTask && (
         <Modal
           task={currentTask}
           steps={steps.filter((step) => step.taskId === currentTask.id)}
           setCurrentGoal={setCurrentTask}
-          toggleStep={toggleStep}
         />
-      )} */}
+      )}
     </div>
   );
 };

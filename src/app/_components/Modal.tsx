@@ -8,10 +8,9 @@ interface props {
   task: Task;
   steps: Step[];
   setCurrentGoal: (goal: Task | null) => void;
-  toggleStep: (id: number, isCompleted: boolean) => void;
 }
 
-const Modal = ({ task, steps, setCurrentGoal, toggleStep }: props) => {
+const Modal = ({ task, steps, setCurrentGoal }: props) => {
   return (
     <div
       className="fixed left-0 top-0 flex h-screen w-screen items-center justify-center bg-black/90"
@@ -30,7 +29,7 @@ const Modal = ({ task, steps, setCurrentGoal, toggleStep }: props) => {
         <h1 className="mb-10 text-center text-2xl font-bold">{task.name}</h1>
         <div>
           {steps.map((step) => (
-            <StepCheck task={step} toggleTask={toggleStep} key={step.id} />
+            <StepCheck step={step} key={step.id} />
           ))}
         </div>
       </div>
