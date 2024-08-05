@@ -47,7 +47,7 @@ const taskSlice = createSlice({
         state.tasks = action.payload;
       })
 
-      .addCase(createTask.fulfilled, (state, action) => {
+      .addCase(createTask.fulfilled, (state, action: PayloadAction<Task>) => {
         state.tasks.push(action.payload);
       });
   },
