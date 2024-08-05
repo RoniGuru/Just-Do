@@ -4,38 +4,27 @@ import React, { useState } from "react";
 import Modal from "./Modal";
 import StepCheck from "~/app/_components/StepCheck";
 import CreateTaskForm from "./CreateTaskForm";
+import { Task } from "../../lib/features/task/taskSlice";
 
-export interface Task {
-  id: number;
-  name: string;
-  isCompleted: boolean;
-  createdAt: Date;
-  updatedAt: Date | null;
-}
-export interface Step {
-  id: number;
-  name: string;
-  isCompleted: boolean;
-  createdAt: Date;
-  updatedAt: Date | null;
-  taskId: number;
-}
+import { useAppDispatch, useAppSelector } from "~/lib/hooks";
+import { useEffect } from "react";
+import { fetchTasks } from "../../lib/features/task/taskSlice";
 
-interface props {
-  tasks: Task[];
-  steps: Step[];
+const HomePageClient = () => {
+  const dispatch = useAppDispatch();
+  const tasks = useAppSelector((state) => state.task.tasks);
+  const steps = useAppSelector((state) => state.step.steps);
 
-  toggleStep: (id: number, isCompleted: boolean) => void;
-  createTask: (name: string) => void;
-}
+  useEffect(() => {
+    dispatch(fetchTasks());
+  }, []);
 
-const HomePageClient = ({ tasks, steps, toggleStep, createTask }: props) => {
   const [currentTask, setCurrentTask] = useState<Task | null>(null);
 
   return (
     <div>
       <div className="wrap flex flex-row gap-4 overflow-hidden p-4">
-        {tasks.map((task) => (
+        {tasks?.map((task) => (
           <div
             className="max-h-96 w-64 rounded bg-slate-300 p-4 hover:opacity-80"
             onClick={() => setCurrentTask(task)}
@@ -52,7 +41,7 @@ const HomePageClient = ({ tasks, steps, toggleStep, createTask }: props) => {
           </div>
         ))}
       </div>
-      <CreateTaskForm createTask={createTask} />
+      {/* <CreateTaskForm createTask={createTask} tasks={tasks} />
 
       {currentTask && (
         <Modal
@@ -61,7 +50,7 @@ const HomePageClient = ({ tasks, steps, toggleStep, createTask }: props) => {
           setCurrentGoal={setCurrentTask}
           toggleStep={toggleStep}
         />
-      )}
+      )} */}
     </div>
   );
 };

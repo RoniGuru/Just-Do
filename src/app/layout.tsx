@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
 import { TopNav } from "./_components/topnav";
+import StoreProvider from "./StoreProvider";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -18,13 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
-        {" "}
-        <div className="grid h-screen grid-rows-[auto,1fr]">
-          <TopNav />
-          <main className="overflow-y-scroll">{children}</main>
-        </div>
-        {modal}
-        <div id="modal-root" />
+        <StoreProvider>
+          <div className="grid h-screen grid-rows-[auto,1fr]">
+            <TopNav />
+            <main className="overflow-y-scroll">{children}</main>
+          </div>
+        </StoreProvider>
       </body>
     </html>
   );

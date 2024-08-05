@@ -1,7 +1,7 @@
 "use client";
 import { Checkbox } from "./ui/checkbox";
 import { useState } from "react";
-import { Task } from "./HomePageClient";
+import { Task } from "../../lib/features/task/taskSlice";
 
 interface TaskProps {
   task: Task;

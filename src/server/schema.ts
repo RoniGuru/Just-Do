@@ -1,6 +1,3 @@
-// Example model schema from the Drizzle docs
-// https://orm.drizzle.team/docs/sql-schema-declaration
-
 import { sql } from "drizzle-orm";
 
 import {
@@ -21,7 +18,7 @@ import {
  */
 export const createTable = pgTableCreator((name) => `just-do_${name}`);
 
-export const tasks = createTable(
+export const tasksTable = createTable(
   "task",
   {
     id: serial("id").primaryKey(),
@@ -39,10 +36,10 @@ export const tasks = createTable(
   }),
 );
 
-export const steps = createTable("step", {
+export const stepsTable = createTable("step", {
   id: serial("id").primaryKey(),
   taskId: integer("task_id")
-    .references(() => tasks.id)
+    .references(() => tasksTable.id)
     .notNull(),
   name: varchar("name", { length: 256 }).notNull(),
   isCompleted: boolean("is_completed").default(false).notNull(),

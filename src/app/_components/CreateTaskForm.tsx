@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
+import { Task } from "~/lib/features/task/taskSlice";
 
 interface props {
-  createTask: (name: string) => void;
+  createTask: (name: string) => Task;
+  tasks: Task[];
 }
-const CreateTaskForm = ({ createTask }: props) => {
+const CreateTaskForm = ({ createTask, tasks }: props) => {
   const [name, setName] = useState("");
   return (
     <div>
@@ -16,7 +18,8 @@ const CreateTaskForm = ({ createTask }: props) => {
       />
       <button
         onClick={() => {
-          createTask(name);
+          const newTask = createTask(name);
+          tasks.push(newTask);
         }}
       >
         create
