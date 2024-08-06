@@ -11,9 +11,9 @@
 - [x] modal
 - [x] toggle step
 - [x] create task
-- [] create step
-- [] delete task
+- [x] create step
 - [] delete step
+- [] delete task
 - [] toggle task
 - [] limit amount of tasks and steps
 - [] edit step

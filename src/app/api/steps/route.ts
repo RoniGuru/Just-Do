@@ -46,7 +46,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ step: newStep[0] });
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to create task" },
+      { error: "Failed to create step" },
       { status: 500 },
     );
   }

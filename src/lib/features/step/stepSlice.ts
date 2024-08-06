@@ -5,6 +5,7 @@ import {
   current,
 } from "@reduxjs/toolkit";
 import axios from "axios";
+import { create } from "domain";
 import { act } from "react";
 
 interface StepState {
@@ -46,6 +47,13 @@ const stepSlice = createSlice({
         const newStep = action.payload;
         console.log(newStep);
         state.steps.push(newStep);
+      })
+      .addCase(deleteStep.fulfilled, (state, action) => {
+        const { id } = action.payload;
+        state.steps.splice(
+          state.steps.findIndex((step) => step.id === id),
+          1,
+        );
       });
   },
 });
@@ -59,9 +67,18 @@ export const fetchSteps = createAsyncThunk<Step[]>(
 );
 
 export const toggleStep = createAsyncThunk(
-  "steps/toggleSteps",
+  "steps/toggleStep",
   async ({ id, toggle }: { id: number; toggle: boolean }) => {
     const response = await axios.put("/api/steps/", { id, toggle });
+    return response.data;
+  },
+);
+
+export const deleteStep = createAsyncThunk(
+  "steps/deleteStep",
+  async (id: number) => {
+    const response = await axios.delete(`/api/steps/${id}`);
+
     return response.data;
   },
 );

@@ -4,11 +4,24 @@ import { IoIosCloseCircle } from "react-icons/io";
 import CreateStepForm from "./CreateStepForm";
 import { Task } from "../../lib/features/task/taskSlice";
 import { useAppSelector } from "~/lib/hooks";
+import { MdDelete } from "react-icons/md";
+import { deleteStep } from "~/lib/features/step/stepSlice";
+import { useAppDispatch } from "~/lib/hooks";
 
 interface props {
   task: Task;
 
   setCurrentTask: (task: Task | null) => void;
+}
+
+function DeleteStepButton({ id }: { id: number }) {
+  const dispatch = useAppDispatch();
+  return (
+    <MdDelete
+      onClick={() => dispatch(deleteStep(id))}
+      className="hover:opacity-75"
+    />
+  );
 }
 
 const Modal = ({ task, setCurrentTask }: props) => {
@@ -33,7 +46,10 @@ const Modal = ({ task, setCurrentTask }: props) => {
           {steps
             .filter((step) => step.taskId === task.id)
             .map((step) => (
-              <StepCheck step={step} key={step.id} />
+              <div key={step.id} className="flex justify-between">
+                <StepCheck step={step} />
+                <DeleteStepButton id={step.id} />
+              </div>
             ))}
         </div>
         <div>
