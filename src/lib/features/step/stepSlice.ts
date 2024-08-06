@@ -5,6 +5,7 @@ import {
   current,
 } from "@reduxjs/toolkit";
 import axios from "axios";
+import { act } from "react";
 
 interface StepState {
   steps: Step[];
@@ -40,6 +41,11 @@ const stepSlice = createSlice({
         if (index !== -1) {
           state.steps[index] = action.payload.step;
         }
+      })
+      .addCase(createStep.fulfilled, (state, action) => {
+        const newStep = action.payload;
+        console.log(newStep);
+        state.steps.push(newStep);
       });
   },
 });
@@ -57,6 +63,14 @@ export const toggleStep = createAsyncThunk(
   async ({ id, toggle }: { id: number; toggle: boolean }) => {
     const response = await axios.put("/api/steps/", { id, toggle });
     return response.data;
+  },
+);
+
+export const createStep = createAsyncThunk(
+  "steps/createSteps",
+  async ({ name, taskId }: { name: string; taskId: number }) => {
+    const response = await axios.post("/api/steps/", { name, taskId });
+    return response.data.step;
   },
 );
 

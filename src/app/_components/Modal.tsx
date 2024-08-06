@@ -1,7 +1,7 @@
 import StepCheck from "~/app/_components/StepCheck";
 
 import { IoIosCloseCircle } from "react-icons/io";
-import { Step } from "../../lib/features/step/stepSlice";
+import CreateStepForm from "./CreateStepForm";
 import { Task } from "../../lib/features/task/taskSlice";
 import { useAppSelector } from "~/lib/hooks";
 
@@ -35,6 +35,9 @@ const Modal = ({ task, setCurrentTask }: props) => {
             .map((step) => (
               <StepCheck step={step} key={step.id} />
             ))}
+        </div>
+        <div>
+          <CreateStepForm taskId={task.id} />
         </div>
       </div>
     </div>

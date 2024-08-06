@@ -29,3 +29,25 @@ export async function PUT(request: Request) {
     return NextResponse.json({ error: "Failed to toggle" }, { status: 500 });
   }
 }
+
+export async function POST(req: Request) {
+  try {
+    const { name, taskId } = await req.json();
+    const newStep = await db
+      .insert(stepsTable)
+      .values({
+        name,
+        isCompleted: false,
+        createdAt: new Date(),
+        taskId: taskId,
+        updatedAt: null,
+      })
+      .returning();
+    return NextResponse.json({ step: newStep[0] });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to create task" },
+      { status: 500 },
+    );
+  }
+}

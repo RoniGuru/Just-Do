@@ -1,12 +1,14 @@
-"use client";
+import { useAppDispatch } from "~/lib/hooks";
+import { createStep } from "~/lib/features/step/stepSlice";
 import { useState } from "react";
 
-import { useAppDispatch } from "~/lib/hooks";
-import { createTask } from "~/lib/features/task/taskSlice";
+interface props {
+  taskId: number;
+}
 
-const CreateTaskForm = () => {
-  const dispatch = useAppDispatch();
+const CreateStepForm = ({ taskId }: props) => {
   const [name, setName] = useState("");
+  const dispatch = useAppDispatch();
   return (
     <div>
       <input
@@ -17,13 +19,13 @@ const CreateTaskForm = () => {
       />
       <button
         onClick={() => {
-          dispatch(createTask(name));
+          dispatch(createStep({ name, taskId }));
         }}
       >
-        create
+        create STEP
       </button>
     </div>
   );
 };
 
-export default CreateTaskForm;
+export default CreateStepForm;

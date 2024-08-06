@@ -9,8 +9,8 @@
 - [x] basic ui
 - [x] steps scroll
 - [x] modal
-- [] toggle step
-- [] create task
+- [x] toggle step
+- [x] create task
 - [] create step
 - [] delete task
 - [] delete step
