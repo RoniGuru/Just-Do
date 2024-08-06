@@ -7,6 +7,7 @@ import { useAppSelector } from "~/lib/hooks";
 import { MdDelete } from "react-icons/md";
 import { deleteStep } from "~/lib/features/step/stepSlice";
 import { useAppDispatch } from "~/lib/hooks";
+import DeleteTaskButton from "./DeleteTaskButton";
 
 interface props {
   task: Task;
@@ -54,6 +55,7 @@ const Modal = ({ task, setCurrentTask }: props) => {
         </div>
         <div>
           <CreateStepForm taskId={task.id} />
+          <DeleteTaskButton id={task.id} setCurrentTask={setCurrentTask} />
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@ import { Task } from "../../lib/features/task/taskSlice";
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 import { fetchTasks } from "../../lib/features/task/taskSlice";
 import { fetchSteps } from "~/lib/features/step/stepSlice";
+import DeleteTaskButton from "./DeleteTaskButton";
 
 const HomePageClient = () => {
   const dispatch = useAppDispatch();

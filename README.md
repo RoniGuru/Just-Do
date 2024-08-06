@@ -12,8 +12,8 @@
 - [x] toggle step
 - [x] create task
 - [x] create step
-- [] delete step
-- [] delete task
+- [x] delete step
+- [x] delete task
 - [] toggle task
 - [] limit amount of tasks and steps
 - [] edit step

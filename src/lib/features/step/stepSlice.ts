@@ -28,7 +28,12 @@ const initialState: StepState = {
 const stepSlice = createSlice({
   name: "steps",
   initialState,
-  reducers: {},
+  reducers: {
+    deleteStepsByTaskId: (state, action) => {
+      const { id } = action.payload;
+      state.steps.filter((step) => step.taskId === id);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchSteps.fulfilled, (state, action) => {
@@ -91,4 +96,5 @@ export const createStep = createAsyncThunk(
   },
 );
 
+export const { deleteStepsByTaskId } = stepSlice.actions;
 export default stepSlice.reducer;
