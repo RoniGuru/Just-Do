@@ -14,14 +14,23 @@ export async function GET() {
   }
 }
 
-// You can add other handlers for different HTTP methods if needed
-// For example:
-// export async function POST(req: Request) {
-//   const { title, description } = await req.json();
-//   try {
-//     const newTask = await db.insertInto(tasksTable).values({ title, description }).returning("*");
-//     return NextResponse.json(newTask, { status: 201 });
-//   } catch (error) {
-//     return NextResponse.json({ error: "Failed to create task" }, { status: 500 });
-//   }
-// }
+export async function POST(req: Request) {
+  try {
+    const { name } = await req.json();
+    const newTask = await db
+      .insert(tasksTable)
+      .values({
+        name,
+        isCompleted: false,
+        createdAt: new Date(),
+        updatedAt: null,
+      })
+      .returning();
+    return NextResponse.json({ task: newTask[0] });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to create task" },
+      { status: 500 },
+    );
+  }
+}

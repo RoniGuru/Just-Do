@@ -1,4 +1,9 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  PayloadAction,
+  createAsyncThunk,
+  createSlice,
+  current,
+} from "@reduxjs/toolkit";
 
 import axios from "axios";
 
@@ -27,12 +32,11 @@ export const fetchTasks = createAsyncThunk<Task[]>(
   },
 );
 
-// Async thunk to create a new task
-export const createTask = createAsyncThunk<Task, Partial<Task>>(
+export const createTask = createAsyncThunk<Task, string>(
   "tasks/createTask",
-  async (task) => {
-    const response = await axios.post("/api/tasks", task);
-    return response.data;
+  async (name) => {
+    const response = await axios.post("/api/tasks", { name });
+    return response.data.task;
   },
 );
 
@@ -47,8 +51,10 @@ const taskSlice = createSlice({
         state.tasks = action.payload;
       })
 
-      .addCase(createTask.fulfilled, (state, action: PayloadAction<Task>) => {
-        state.tasks.push(action.payload);
+      .addCase(createTask.fulfilled, (state, action) => {
+        const newTask = action.payload;
+        state.tasks.push(newTask);
+        console.log(current(state.tasks));
       });
   },
 });

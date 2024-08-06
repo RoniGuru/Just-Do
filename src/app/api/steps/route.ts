@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "~/server/db";
 import { stepsTable } from "~/server/schema";
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 export async function GET() {
   try {
@@ -18,12 +18,13 @@ export async function GET() {
 export async function PUT(request: Request) {
   try {
     const { id, toggle } = await request.json();
-    const steps = await db
+    const step = await db
       .update(stepsTable)
       .set({ isCompleted: !toggle })
       .where(eq(stepsTable.id, id))
       .returning();
-    return NextResponse.json({ step: steps[0] });
+    console.log(step);
+    return NextResponse.json({ step: step });
   } catch (error) {
     return NextResponse.json({ error: "Failed to toggle" }, { status: 500 });
   }

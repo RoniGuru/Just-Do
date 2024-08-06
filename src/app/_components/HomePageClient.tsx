@@ -1,25 +1,23 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
 import StepCheck from "~/app/_components/StepCheck";
 import CreateTaskForm from "./CreateTaskForm";
 import { Task } from "../../lib/features/task/taskSlice";
 
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
-import { useEffect } from "react";
 import { fetchTasks } from "../../lib/features/task/taskSlice";
 import { fetchSteps } from "~/lib/features/step/stepSlice";
-import { toggleStep } from "~/lib/features/step/stepSlice";
-import { Checkbox } from "./ui/checkbox";
 
 const HomePageClient = () => {
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     dispatch(fetchTasks());
     dispatch(fetchSteps());
-  }, []);
+  }, [dispatch]);
 
-  const dispatch = useAppDispatch();
   const tasks = useAppSelector((state) => state.task.tasks);
   const steps = useAppSelector((state) => state.step.steps);
 
@@ -42,7 +40,7 @@ const HomePageClient = () => {
               {steps
                 .filter((step) => step.taskId === task.id)
                 .map((step) => (
-                  <div key={step.id} className="flex items-center gap-2">
+                  <div className="flex items-center gap-2" key={step.id}>
                     <StepCheck step={step} />
                   </div>
                 ))}
@@ -50,7 +48,7 @@ const HomePageClient = () => {
           </div>
         ))}
       </div>
-      {/* <CreateTaskForm createTask={createTask} tasks={tasks} /> */}
+      <CreateTaskForm />
 
       {currentTask && (
         <Modal task={currentTask} setCurrentTask={setCurrentTask} />

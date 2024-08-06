@@ -1,5 +1,28 @@
-task
+## tasks
 
-[] - basic ui
-[] - database setup
-[] - task data
+- [x] tailwind
+- [x] env gitignore
+- [x] git
+- [x] mock data
+- [x] react router
+- [x] goal card
+- [x] basic ui
+- [x] steps scroll
+- [x] modal
+- [] toggle step
+- [] create task
+- [] create step
+- [] delete task
+- [] delete step
+- [] toggle task
+- [] limit amount of tasks and steps
+- [] edit step
+- [] edit task
+- [] clerk
+- []
+- []
+- []
+- []
+- []
+- []
+- []

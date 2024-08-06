@@ -30,9 +30,11 @@ const Modal = ({ task, setCurrentTask }: props) => {
         />
         <h1 className="mb-10 text-center text-2xl font-bold">{task.name}</h1>
         <div>
-          {steps.map((step) => (
-            <StepCheck step={step} key={step.id} />
-          ))}
+          {steps
+            .filter((step) => step.taskId === task.id)
+            .map((step) => (
+              <StepCheck step={step} key={step.id} />
+            ))}
         </div>
       </div>
     </div>
