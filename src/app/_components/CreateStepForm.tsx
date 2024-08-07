@@ -12,6 +12,11 @@ const CreateStepForm = ({ taskId, stepsLength }: props) => {
   const dispatch = useAppDispatch();
 
   function handleCreateStep() {
+    if (name.length === 0 || name.length > 15) {
+      alert("name cannot be empty or longer than 15 characters");
+      return;
+    }
+
     if (stepsLength >= 5) {
       alert("task can only have 5 steps");
     } else {

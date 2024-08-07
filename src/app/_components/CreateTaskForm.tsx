@@ -10,6 +10,10 @@ const CreateTaskForm = ({ tasksLength }: { tasksLength: number }) => {
 
   function handleCreateTask() {
     console.log(tasksLength);
+    if (name.length === 0 || name.length > 15) {
+      alert("name cannot be empty or longer than 15 characters");
+      return;
+    }
     if (tasksLength >= 5) {
       alert("over task limit of 5");
     } else {

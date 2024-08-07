@@ -14,11 +14,12 @@
 - [x] create step
 - [x] delete step
 - [x] delete task
-- [] limit amount of tasks and steps
+- [x] limit amount of tasks and steps
 - [] task steps input limitations
+- [] localstorage and sync
 - [] edit step
 - [] edit task
-- [] localstorage and sync
+
 - [] clerk
 - []
 - []
