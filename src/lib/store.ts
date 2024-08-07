@@ -1,9 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import taskReducer from "./features/task/taskSlice";
 import stepReducer from "./features/step/stepSlice";
+import currentTaskReducer from "./features/currentTask/currentTaskSlice";
 export const makeStore = () => {
   return configureStore({
-    reducer: { task: taskReducer, step: stepReducer },
+    reducer: {
+      task: taskReducer,
+      step: stepReducer,
+      currentTask: currentTaskReducer,
+    },
   });
 };
 

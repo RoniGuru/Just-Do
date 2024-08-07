@@ -17,3 +17,20 @@ export async function DELETE(req: Request, context: any) {
     );
   }
 }
+
+export async function PUT(req: Request, context: any) {
+  try {
+    const { id } = context.params;
+    const { name } = await req.json();
+
+    const task = await db
+      .update(tasksTable)
+      .set({ name: name })
+      .where(eq(tasksTable.id, id))
+      .returning();
+
+    return NextResponse.json({ task: task });
+  } catch (error: Error | any) {
+    return NextResponse.json({ error: "Failed to edit task" }, { status: 500 });
+  }
+}

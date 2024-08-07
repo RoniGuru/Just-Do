@@ -4,13 +4,12 @@ import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
 import StepCheck from "~/app/_components/StepCheck";
 import CreateTaskForm from "./CreateTaskForm";
-import { Task } from "../../lib/features/task/taskSlice";
 
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 import { fetchTasks } from "../../lib/features/task/taskSlice";
 import { fetchSteps } from "~/lib/features/step/stepSlice";
-import DeleteTaskButton from "./DeleteTaskButton";
 
+import { setCurrentTask } from "~/lib/features/currentTask/currentTaskSlice";
 const HomePageClient = () => {
   const dispatch = useAppDispatch();
 
@@ -21,8 +20,7 @@ const HomePageClient = () => {
 
   const tasks = useAppSelector((state) => state.task.tasks);
   const steps = useAppSelector((state) => state.step.steps);
-
-  const [currentTask, setCurrentTask] = useState<Task | null>(null);
+  const currentTask = useAppSelector((state) => state.currentTask.current);
 
   return (
     <div>
@@ -31,7 +29,11 @@ const HomePageClient = () => {
         {tasks?.map((task) => (
           <div
             className="max-h-96 w-64 rounded bg-slate-300 p-4 hover:opacity-80"
-            onClick={() => setCurrentTask(task)}
+            onClick={() => {
+              dispatch(setCurrentTask(task));
+              console.log(task);
+              console.log(tasks);
+            }}
             key={task.id}
           >
             <h1 className="h-12 overflow-hidden text-lg font-bold">
@@ -51,9 +53,7 @@ const HomePageClient = () => {
       </div>
       <CreateTaskForm tasksLength={tasks.length} />
 
-      {currentTask && (
-        <Modal task={currentTask} setCurrentTask={setCurrentTask} />
-      )}
+      {currentTask && <Modal task={currentTask} />}
     </div>
   );
 };

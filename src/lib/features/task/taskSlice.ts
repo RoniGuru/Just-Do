@@ -48,6 +48,16 @@ export const deleteTask = createAsyncThunk(
     return response.data.id;
   },
 );
+
+export const editTaskName = createAsyncThunk(
+  "tasks/editTaskName",
+  async ({ id, name }: { id: number; name: string }) => {
+    const response = await axios.put(`/api/tasks/${id}`, { name: name });
+
+    return response.data;
+  },
+);
+
 const taskSlice = createSlice({
   name: "tasks",
   initialState,
@@ -67,6 +77,15 @@ const taskSlice = createSlice({
         const id = action.payload;
 
         state.tasks.splice(state.tasks.findIndex((task) => task.id === id));
+      })
+      .addCase(editTaskName.fulfilled, (state, action) => {
+        const index = state.tasks.findIndex(
+          (task) => task.id === action.payload.task[0].id,
+        );
+
+        if (index !== -1) {
+          state.tasks[index] = action.payload.task[0];
+        }
       });
   },
 });

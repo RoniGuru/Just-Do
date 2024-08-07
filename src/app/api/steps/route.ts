@@ -23,7 +23,7 @@ export async function PUT(request: Request) {
       .set({ isCompleted: !toggle })
       .where(eq(stepsTable.id, id))
       .returning();
-    console.log(step);
+
     return NextResponse.json({ step: step });
   } catch (error) {
     return NextResponse.json({ error: "Failed to toggle" }, { status: 500 });

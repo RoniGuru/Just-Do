@@ -15,12 +15,12 @@
 - [x] delete step
 - [x] delete task
 - [x] limit amount of tasks and steps
-- [] task steps input limitations
-- [] localstorage and sync
-- [] edit step
-- [] edit task
-
+- [x] task steps input limitations
+- [] current task state
+- [] ui
+- [] nav
 - [] clerk
+- [] localstorage and sync
 - []
 - []
 - []
