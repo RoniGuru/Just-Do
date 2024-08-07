@@ -16,10 +16,12 @@
 - [x] delete task
 - [x] limit amount of tasks and steps
 - [x] task steps input limitations
-- [] current task state
+- [x] current task state
+- [] clerk
+- [] user to table
 - [] ui
 - [] nav
-- [] clerk
+
 - [] localstorage and sync
 - []
 - []
