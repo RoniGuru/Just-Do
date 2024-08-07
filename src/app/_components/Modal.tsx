@@ -54,7 +54,7 @@ const Modal = ({ task, setCurrentTask }: props) => {
             ))}
         </div>
         <div>
-          <CreateStepForm taskId={task.id} />
+          <CreateStepForm taskId={task.id} stepsLength={steps.length} />
           <DeleteTaskButton id={task.id} setCurrentTask={setCurrentTask} />
         </div>
       </div>

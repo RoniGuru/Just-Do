@@ -50,7 +50,7 @@ const stepSlice = createSlice({
       })
       .addCase(createStep.fulfilled, (state, action) => {
         const newStep = action.payload;
-        console.log(newStep);
+
         state.steps.push(newStep);
       })
       .addCase(deleteStep.fulfilled, (state, action) => {

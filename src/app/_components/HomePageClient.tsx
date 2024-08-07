@@ -49,7 +49,7 @@ const HomePageClient = () => {
           </div>
         ))}
       </div>
-      <CreateTaskForm />
+      <CreateTaskForm tasksLength={tasks.length} />
 
       {currentTask && (
         <Modal task={currentTask} setCurrentTask={setCurrentTask} />

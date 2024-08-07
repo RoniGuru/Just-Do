@@ -4,9 +4,19 @@ import { useState } from "react";
 import { useAppDispatch } from "~/lib/hooks";
 import { createTask } from "~/lib/features/task/taskSlice";
 
-const CreateTaskForm = () => {
+const CreateTaskForm = ({ tasksLength }: { tasksLength: number }) => {
   const dispatch = useAppDispatch();
   const [name, setName] = useState("");
+
+  function handleCreateTask() {
+    console.log(tasksLength);
+    if (tasksLength >= 5) {
+      alert("over task limit of 5");
+    } else {
+      dispatch(createTask(name));
+      setName("");
+    }
+  }
   return (
     <div>
       <input
@@ -15,13 +25,7 @@ const CreateTaskForm = () => {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <button
-        onClick={() => {
-          dispatch(createTask(name));
-        }}
-      >
-        create
-      </button>
+      <button onClick={handleCreateTask}>create</button>
     </div>
   );
 };
