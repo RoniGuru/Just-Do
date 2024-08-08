@@ -10,13 +10,17 @@ import { fetchTasks } from "../../lib/features/task/taskSlice";
 import { fetchSteps } from "~/lib/features/step/stepSlice";
 
 import { setCurrentTask } from "~/lib/features/currentTask/currentTaskSlice";
+
+import { emptySteps } from "~/lib/features/step/stepSlice";
+import { emptyTask } from "../../lib/features/task/taskSlice";
+
 const HomePageClient = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchTasks());
     dispatch(fetchSteps());
-  }, [dispatch]);
+  }, []);
 
   const tasks = useAppSelector((state) => state.task.tasks);
   const steps = useAppSelector((state) => state.step.steps);

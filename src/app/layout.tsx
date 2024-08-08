@@ -19,7 +19,7 @@ export default function RootLayout({
   modal,
 }: Readonly<{ children: React.ReactNode; modal: React.ReactNode }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider afterSignOutUrl="/">
       <html lang="en" className={`${GeistSans.variable}`}>
         <body>
           <StoreProvider>

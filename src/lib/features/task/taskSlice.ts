@@ -61,7 +61,11 @@ export const editTaskName = createAsyncThunk(
 const taskSlice = createSlice({
   name: "tasks",
   initialState,
-  reducers: {},
+  reducers: {
+    emptyTask: (state) => {
+      state.tasks = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
 
@@ -89,5 +93,5 @@ const taskSlice = createSlice({
       });
   },
 });
-
+export const { emptyTask } = taskSlice.actions;
 export default taskSlice.reducer;

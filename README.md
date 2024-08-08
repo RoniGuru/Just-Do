@@ -18,8 +18,9 @@
 - [x] task steps input limitations
 - [x] current task state
 - [x] clerk
-- [] user to table
-- [] update routes for user
+- [x] user to table
+- [x] update routes for user
+- [] reset state on user signout
 - [] ui
 - [] nav
 
