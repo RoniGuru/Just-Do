@@ -2,10 +2,18 @@ import { NextResponse } from "next/server";
 import { db } from "~/server/db";
 import { stepsTable } from "~/server/schema";
 import { eq } from "drizzle-orm";
+import { auth } from "@clerk/nextjs/server";
 
 export async function GET() {
+  const user = auth();
+  if (!user.userId)
+    return NextResponse.json({ error: "unauthorized access" }, { status: 401 });
+
   try {
-    const steps = await db.select().from(stepsTable);
+    const steps = await db
+      .select()
+      .from(stepsTable)
+      .where(eq(stepsTable.userId, user.userId));
     return NextResponse.json(steps);
   } catch (error) {
     return NextResponse.json(
@@ -16,6 +24,10 @@ export async function GET() {
 }
 
 export async function PUT(request: Request) {
+  const user = auth();
+  if (!user.userId)
+    return NextResponse.json({ error: "unauthorized access" }, { status: 401 });
+
   try {
     const { id, toggle } = await request.json();
     const step = await db
@@ -31,6 +43,10 @@ export async function PUT(request: Request) {
 }
 
 export async function POST(req: Request) {
+  const user = auth();
+  if (!user.userId)
+    return NextResponse.json({ error: "unauthorized access" }, { status: 401 });
+
   try {
     const { name, taskId } = await req.json();
     const newStep = await db
@@ -41,6 +57,7 @@ export async function POST(req: Request) {
         createdAt: new Date(),
         taskId: taskId,
         updatedAt: null,
+        userId: user.userId,
       })
       .returning();
     return NextResponse.json({ step: newStep[0] });

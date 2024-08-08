@@ -44,6 +44,7 @@ export const stepsTable = createTable("step", {
     .notNull(),
   name: varchar("name", { length: 256 }).notNull(),
   isCompleted: boolean("is_completed").default(false).notNull(),
+  userId: varchar("userId", { length: 256 }).notNull(),
   createdAt: timestamp("created_at", { withTimezone: true })
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
