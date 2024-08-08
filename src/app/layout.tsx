@@ -7,6 +7,7 @@ import { TopNav } from "./_components/topnav";
 import StoreProvider from "./StoreProvider";
 
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -27,6 +28,7 @@ export default function RootLayout({
               <TopNav />
               <main className="overflow-y-scroll">{children}</main>
             </div>
+            <Toaster />
           </StoreProvider>
         </body>
       </html>

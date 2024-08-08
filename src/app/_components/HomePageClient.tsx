@@ -11,15 +11,21 @@ import { fetchSteps } from "~/lib/features/step/stepSlice";
 
 import { setCurrentTask } from "~/lib/features/currentTask/currentTaskSlice";
 
-import { emptySteps } from "~/lib/features/step/stepSlice";
-import { emptyTask } from "../../lib/features/task/taskSlice";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@clerk/nextjs";
 
 const HomePageClient = () => {
   const dispatch = useAppDispatch();
+  const { userId } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
-    dispatch(fetchTasks());
-    dispatch(fetchSteps());
+    if (!userId) {
+      router.push("/login");
+    } else {
+      dispatch(fetchTasks());
+      dispatch(fetchSteps());
+    }
   }, []);
 
   const tasks = useAppSelector((state) => state.task.tasks);

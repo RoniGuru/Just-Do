@@ -120,7 +120,10 @@ const Modal = ({ task }: props) => {
             ))}
         </div>
         <div>
-          <CreateStepForm taskId={task.id} stepsLength={steps.length} />
+          <CreateStepForm
+            taskId={task.id}
+            stepsLength={steps.filter((step) => step.taskId === task.id).length}
+          />
           <DeleteTaskButton id={task.id} />
         </div>
       </div>

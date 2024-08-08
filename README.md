@@ -20,7 +20,9 @@
 - [x] clerk
 - [x] user to table
 - [x] update routes for user
-- [] reset state on user signout
+- [x] delete user button
+- [x] reset state on user signout
+- [] toaster for user delete
 - [] ui
 - [] nav
 
