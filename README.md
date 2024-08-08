@@ -17,8 +17,9 @@
 - [x] limit amount of tasks and steps
 - [x] task steps input limitations
 - [x] current task state
-- [] clerk
+- [x] clerk
 - [] user to table
+- [] update routes for user
 - [] ui
 - [] nav
 
