@@ -1,17 +1,14 @@
 "use client";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { CgDanger } from "react-icons/cg";
+import axios from "axios";
 
-const DotIcon = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 512 512"
-      fill="currentColor"
-    >
-      <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z" />
-    </svg>
-  );
-};
+async function deleteUser() {
+  const response = await axios.delete("/api/clerk/delete-user/");
+
+  console.log(response);
+  window.location.reload();
+}
 
 export function TopNav() {
   return (
@@ -26,9 +23,17 @@ export function TopNav() {
           <UserButton>
             <UserButton.MenuItems>
               <UserButton.Action
-                label="Open chat"
-                labelIcon={<DotIcon />}
-                onClick={() => alert("init chat")}
+                label="Delete User"
+                labelIcon={<CgDanger size={18} className="center" />}
+                onClick={() => {
+                  const userConfirmed = window.confirm(
+                    "Do you want to delete this account and all its data",
+                  );
+                  if (userConfirmed) {
+                    deleteUser();
+                  } else {
+                  }
+                }}
               />
             </UserButton.MenuItems>
           </UserButton>
