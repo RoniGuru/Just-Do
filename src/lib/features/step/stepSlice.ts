@@ -36,6 +36,7 @@ const stepSlice = createSlice({
         state.steps = action.payload;
       })
       .addCase(toggleStep.fulfilled, (state, action) => {
+        console.log(action.payload.step);
         const index = state.steps.findIndex(
           (step) => step.id === action.payload.step.id,
         );

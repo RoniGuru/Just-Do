@@ -36,7 +36,7 @@ export async function PUT(request: Request) {
       .where(eq(stepsTable.id, id))
       .returning();
 
-    return NextResponse.json({ step: step });
+    return NextResponse.json({ step: step[0] });
   } catch (error) {
     return NextResponse.json({ error: "Failed to toggle" }, { status: 500 });
   }

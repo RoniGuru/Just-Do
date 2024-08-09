@@ -35,7 +35,7 @@ const CreateTaskForm = ({ tasksLength }: { tasksLength: number }) => {
         className="rounded border border-blue-700 bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
         onClick={handleCreateTask}
       >
-        create
+        create Task
       </button>
     </div>
   );
