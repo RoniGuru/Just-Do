@@ -52,10 +52,13 @@ const stepSlice = createSlice({
       })
       .addCase(deleteStep.fulfilled, (state, action) => {
         const { id } = action.payload;
-        state.steps.splice(
-          state.steps.findIndex((step) => step.id === id),
-          1,
-        );
+        console.log(id);
+        const index = state.steps.findIndex((step) => step.id === Number(id));
+        console.log(index);
+
+        if (index !== -1) {
+          state.steps.splice(index, 1);
+        }
       });
   },
 });

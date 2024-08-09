@@ -29,6 +29,7 @@
 - [x] create task ui
 - [] fix edit
 - [] fix delete step
+- [x] fix step toggle
 - [] scale card ui animation
 
 - [] localstorage and sync
