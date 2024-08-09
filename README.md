@@ -23,9 +23,13 @@
 - [x] delete user button
 - [x] reset state on user signout
 - [x] toaster for user delete
-      -[] fix after delete going to normal page instead of login
-- [] ui
-- [] nav
+- [] fix after delete going to normal page instead of login
+- [x] card task ui
+- [x] card modal ui
+- [x] create task ui
+- [] fix edit
+- [] fix delete step
+- [] scale card ui animation
 
 - [] localstorage and sync
 - []

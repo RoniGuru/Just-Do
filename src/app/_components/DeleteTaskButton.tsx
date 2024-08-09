@@ -1,11 +1,10 @@
-import { MdDelete } from "react-icons/md";
 import { useAppDispatch } from "~/lib/hooks";
 import { deleteTask } from "~/lib/features/task/taskSlice";
 import { deleteStepsByTaskId } from "~/lib/features/step/stepSlice";
-import { Task } from "~/lib/features/task/taskSlice";
+
 import { setCurrentTaskNull } from "~/lib/features/currentTask/currentTaskSlice";
 
-const DeleteTaskButton = ({ id }: { id: number }) => {
+const DeleteTaskButton = ({ id, name }: { id: number; name: string }) => {
   const dispatch = useAppDispatch();
 
   function handleTaskDelete() {
@@ -13,7 +12,11 @@ const DeleteTaskButton = ({ id }: { id: number }) => {
     dispatch(deleteTask(id));
     dispatch(setCurrentTaskNull());
   }
-  return <MdDelete onClick={handleTaskDelete} className="hover:opacity-75" />;
+  return (
+    <button className="rounded border border-red-700 bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700">
+      Delete {name}
+    </button>
+  );
 };
 
 export default DeleteTaskButton;

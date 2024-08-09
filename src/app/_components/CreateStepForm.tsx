@@ -25,14 +25,20 @@ const CreateStepForm = ({ taskId, stepsLength }: props) => {
     }
   }
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center gap-2">
       <input
         type="text"
         placeholder="task name"
         value={name}
+        className="border border-black p-2"
         onChange={(e) => setName(e.target.value)}
       />
-      <button onClick={handleCreateStep}>create STEP</button>
+      <button
+        onClick={handleCreateStep}
+        className="rounded border border-blue-700 bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+      >
+        create STEP
+      </button>
     </div>
   );
 };

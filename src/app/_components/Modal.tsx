@@ -26,7 +26,7 @@ function DeleteStepButton({ id }: { id: number }) {
   return (
     <MdDelete
       onClick={() => dispatch(deleteStep(id))}
-      className="hover:opacity-75"
+      className="hover:scale-125"
     />
   );
 }
@@ -71,7 +71,7 @@ const Modal = ({ task }: props) => {
       onClick={() => dispatch(setCurrentTaskNull())}
     >
       <div
-        className="relative z-30 flex h-2/3 w-1/3 flex-col rounded bg-slate-500 p-4"
+        className="relative z-30 flex h-3/4 w-1/4 flex-col justify-between rounded bg-white p-4"
         onClick={(e) => {
           e.stopPropagation();
           if (isEditing) {
@@ -79,45 +79,47 @@ const Modal = ({ task }: props) => {
           }
         }}
       >
-        <IoIosCloseCircle
-          onClick={() => dispatch(setCurrentTaskNull())}
-          size={30}
-          className="absolute right-4 top-4 cursor-pointer hover:opacity-75"
-          aria-label="close button"
-        />
-        <div className="mb-2">
-          {isEditing ? (
-            <input
-              type="text"
-              value={name ? name : task.name}
-              onChange={(e) => setName(e.target.value)}
-              onBlur={() => {
-                if (name === task.name) {
-                  setIsEditing(false);
-                } else {
-                  handleSave();
-                }
-              }}
-              className="block w-2/3 border-0 text-3xl font-bold leading-tight text-gray-900 focus:outline-none focus:ring-0"
-            />
-          ) : (
-            <span
-              onClick={handleEdit}
-              className="z-40 block w-2/3 border-0 text-3xl font-bold leading-tight text-gray-900 focus:outline-none focus:ring-0"
-            >
-              {task.name}
-            </span>
-          )}
-        </div>
         <div>
-          {steps
-            .filter((step) => step.taskId === task.id)
-            .map((step) => (
-              <div key={step.id} className="flex justify-between">
-                <StepCheck step={step} />
-                <DeleteStepButton id={step.id} />
-              </div>
-            ))}
+          <IoIosCloseCircle
+            onClick={() => dispatch(setCurrentTaskNull())}
+            size={30}
+            className="absolute right-4 top-4 cursor-pointer hover:opacity-75"
+            aria-label="close button"
+          />
+          <div className="mb-2">
+            {isEditing ? (
+              <input
+                type="text"
+                value={name ? name : task.name}
+                onChange={(e) => setName(e.target.value)}
+                onBlur={() => {
+                  if (name === task.name) {
+                    setIsEditing(false);
+                  } else {
+                    handleSave();
+                  }
+                }}
+                className="block w-2/3 border-2 border-black text-3xl font-bold leading-tight text-gray-900 focus:outline-none focus:ring-0"
+              />
+            ) : (
+              <span
+                onClick={handleEdit}
+                className="z-40 block w-2/3 border-0 text-3xl font-bold leading-tight text-gray-900 focus:outline-none focus:ring-0"
+              >
+                {task.name}
+              </span>
+            )}
+          </div>
+          <div className="flex flex-col gap-3">
+            {steps
+              .filter((step) => step.taskId === task.id)
+              .map((step) => (
+                <div key={step.id} className="flex justify-between">
+                  <StepCheck step={step} />
+                  <DeleteStepButton id={step.id} />
+                </div>
+              ))}
+          </div>
         </div>
         <div>
           <CreateStepForm
@@ -127,7 +129,7 @@ const Modal = ({ task }: props) => {
         </div>
       </div>
       <div>
-        <DeleteTaskButton id={task.id} />
+        <DeleteTaskButton id={task.id} name={task.name} />
       </div>
     </div>
   );

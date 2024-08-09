@@ -16,20 +16,27 @@ const CreateTaskForm = ({ tasksLength }: { tasksLength: number }) => {
     }
     if (tasksLength >= 5) {
       alert("over task limit of 5");
+      setName("");
     } else {
       dispatch(createTask(name));
       setName("");
     }
   }
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center gap-2">
       <input
         type="text"
         placeholder="task name"
         value={name}
         onChange={(e) => setName(e.target.value)}
+        className="rounded p-2"
       />
-      <button onClick={handleCreateTask}>create</button>
+      <button
+        className="rounded border border-blue-700 bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+        onClick={handleCreateTask}
+      >
+        create
+      </button>
     </div>
   );
 };

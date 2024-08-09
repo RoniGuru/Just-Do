@@ -27,7 +27,12 @@ function StepCheck({ step }: StepProps) {
         checked={step.isCompleted}
         onClick={handleToggle}
       />
-      <label htmlFor={`check ` + step.id}> {step.name}</label>
+      <label
+        htmlFor={`check ` + step.id}
+        className={step.isCompleted ? "text-gray-500 line-through" : ""}
+      >
+        {step.name}
+      </label>
     </div>
   );
 }
