@@ -74,9 +74,6 @@ const Modal = ({ task }: props) => {
         className="relative z-30 flex h-3/4 w-1/4 flex-col justify-between rounded bg-white p-4"
         onClick={(e) => {
           e.stopPropagation();
-          if (isEditing) {
-            setIsEditing(false);
-          }
         }}
       >
         <div>

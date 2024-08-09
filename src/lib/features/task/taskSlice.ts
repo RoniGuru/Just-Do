@@ -84,11 +84,11 @@ const taskSlice = createSlice({
       })
       .addCase(editTaskName.fulfilled, (state, action) => {
         const index = state.tasks.findIndex(
-          (task) => task.id === action.payload.task[0].id,
+          (task) => task.id === action.payload.task.id,
         );
 
         if (index !== -1) {
-          state.tasks[index] = action.payload.task[0];
+          state.tasks[index] = action.payload.task;
         }
       });
   },

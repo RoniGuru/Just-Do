@@ -44,7 +44,7 @@ export async function PUT(req: Request, context: any) {
       .where(and(eq(tasksTable.id, id), eq(tasksTable.userId, user.userId)))
       .returning();
 
-    return NextResponse.json({ task: task });
+    return NextResponse.json({ task: task[0] });
   } catch (error: Error | any) {
     return NextResponse.json({ error: "Failed to edit task" }, { status: 500 });
   }
