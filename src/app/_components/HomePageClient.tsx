@@ -16,15 +16,16 @@ import { useAuth } from "@clerk/nextjs";
 
 const HomePageClient = () => {
   const dispatch = useAppDispatch();
-  const { userId } = useAuth();
+  const { isSignedIn } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!userId) {
-      router.push("/login");
-    } else {
+    console.log(isSignedIn);
+    if (isSignedIn) {
       dispatch(fetchTasks());
       dispatch(fetchSteps());
+    } else {
+      router.push("/login");
     }
   }, []);
 
@@ -34,15 +35,12 @@ const HomePageClient = () => {
 
   return (
     <div>
-      <button onClick={() => console.log(steps)}>steps</button>
-      <div className="wrap flex flex-row gap-4 overflow-hidden p-4">
+      <div className="wrap h-100 flex flex-row gap-4 overflow-hidden p-4">
         {tasks?.map((task) => (
           <div
-            className="max-h-96 w-64 rounded bg-slate-300 p-4 hover:opacity-80"
+            className="h-96 w-64 rounded-lg bg-white p-4 shadow-md hover:opacity-80"
             onClick={() => {
               dispatch(setCurrentTask(task));
-              console.log(task);
-              console.log(tasks);
             }}
             key={task.id}
           >
@@ -61,8 +59,9 @@ const HomePageClient = () => {
           </div>
         ))}
       </div>
-      <CreateTaskForm tasksLength={tasks.length} />
-
+      <div className="m-16 flex justify-center">
+        <CreateTaskForm tasksLength={tasks.length} />
+      </div>
       {currentTask && <Modal task={currentTask} />}
     </div>
   );

@@ -4,6 +4,7 @@ import { CgDanger } from "react-icons/cg";
 import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@clerk/nextjs";
 
 async function deleteUser() {
   try {
@@ -15,9 +16,10 @@ async function deleteUser() {
 
 export function TopNav() {
   const router = useRouter();
+
   return (
-    <nav className="flex w-full items-center justify-between border-b p-4 text-xl font-semibold">
-      <div>Gallery</div>
+    <nav className="navBg flex w-full items-center justify-between p-4 text-xl font-semibold">
+      <div>JustDo</div>
 
       <div className="flex flex-row items-center gap-4">
         <SignedOut>
@@ -38,9 +40,9 @@ export function TopNav() {
                     deleteUser().then(() => {
                       toast.dismiss("deleting");
                       window.location.reload();
+                      window.location.reload();
                       router.push("/login");
                     });
-                  } else {
                   }
                 }}
               />
@@ -48,7 +50,7 @@ export function TopNav() {
                 label="refresh"
                 labelIcon={<CgDanger size={18} className="center" />}
                 onClick={() => {
-                  window.location.reload();
+                  router.push("/login");
                 }}
               />
             </UserButton.MenuItems>

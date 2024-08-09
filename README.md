@@ -22,7 +22,8 @@
 - [x] update routes for user
 - [x] delete user button
 - [x] reset state on user signout
-- [] toaster for user delete
+- [x] toaster for user delete
+      -[] fix after delete going to normal page instead of login
 - [] ui
 - [] nav
 

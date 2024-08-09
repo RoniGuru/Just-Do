@@ -10,3 +10,11 @@ dialog {
 .cl-userButtonPopoverActionButton__manageAccount {
   display: none;
 }
+
+.background {
+  background-color: #35654d;
+}
+
+.navBg {
+  background-color: #42370f;
+}

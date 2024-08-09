@@ -67,7 +67,7 @@ const Modal = ({ task }: props) => {
 
   return (
     <div
-      className="fixed left-0 top-0 flex h-screen w-screen items-center justify-center bg-black/90"
+      className="fixed left-0 top-0 flex h-screen w-screen flex-col items-center justify-center gap-4 bg-black/90"
       onClick={() => dispatch(setCurrentTaskNull())}
     >
       <div
@@ -124,8 +124,10 @@ const Modal = ({ task }: props) => {
             taskId={task.id}
             stepsLength={steps.filter((step) => step.taskId === task.id).length}
           />
-          <DeleteTaskButton id={task.id} />
         </div>
+      </div>
+      <div>
+        <DeleteTaskButton id={task.id} />
       </div>
     </div>
   );
