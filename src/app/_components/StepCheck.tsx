@@ -29,7 +29,11 @@ function StepCheck({ step }: StepProps) {
       />
       <label
         htmlFor={`check ` + step.id}
-        className={step.isCompleted ? "text-gray-500 line-through" : ""}
+        className={
+          step.isCompleted
+            ? "text-gray-500 line-through duration-150 ease-out"
+            : ""
+        }
       >
         {step.name}
       </label>

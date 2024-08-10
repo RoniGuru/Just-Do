@@ -35,10 +35,10 @@ const HomePageClient = () => {
 
   return (
     <div>
-      <div className="wrap h-100 flex flex-row justify-center gap-4 overflow-hidden p-4">
+      <div className="wrap h-100 flex flex-row justify-center gap-4 overflow-hidden p-4 py-16">
         {tasks?.map((task) => (
           <div
-            className="h-96 w-64 rounded-lg bg-white p-4 shadow-md hover:opacity-80"
+            className="h-96 w-64 rounded-lg bg-white p-4 shadow-md duration-150 ease-out hover:scale-110"
             onClick={() => {
               dispatch(setCurrentTask(task));
             }}
