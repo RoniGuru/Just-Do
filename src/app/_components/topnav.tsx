@@ -16,6 +16,7 @@ async function deleteUser() {
 
 export function TopNav() {
   const router = useRouter();
+  const { signOut } = useAuth();
 
   return (
     <nav className="navBg flex w-full items-center justify-between p-4 text-xl font-semibold">
@@ -39,9 +40,7 @@ export function TopNav() {
                     toast("deleting", { duration: Infinity, id: "deleting" });
                     deleteUser().then(() => {
                       toast.dismiss("deleting");
-                      window.location.reload();
-                      window.location.reload();
-                      router.push("/login");
+                      signOut();
                     });
                   }
                 }}
@@ -50,7 +49,9 @@ export function TopNav() {
                 label="refresh"
                 labelIcon={<CgDanger size={18} className="center" />}
                 onClick={() => {
+                  signOut();
                   router.push("/login");
+                  window.location.reload();
                 }}
               />
             </UserButton.MenuItems>

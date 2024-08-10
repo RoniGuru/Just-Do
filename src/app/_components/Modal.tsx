@@ -1,14 +1,14 @@
 "use client";
-import StepCheck from "~/app/_components/StepCheck";
+import StepCheck from "./ui/StepCheck";
 
 import { IoIosCloseCircle } from "react-icons/io";
-import CreateStepForm from "./CreateStepForm";
+import CreateStepForm from "./ui/CreateStepForm";
 import { Task } from "../../lib/features/task/taskSlice";
 import { useAppSelector } from "~/lib/hooks";
 import { MdDelete } from "react-icons/md";
 import { deleteStep } from "~/lib/features/step/stepSlice";
 import { useAppDispatch } from "~/lib/hooks";
-import DeleteTaskButton from "./DeleteTaskButton";
+import DeleteTaskButton from "./ui/DeleteTaskButton";
 import { useState } from "react";
 import { editTaskName } from "../../lib/features/task/taskSlice";
 

@@ -1,5 +1,5 @@
 "use client";
-import { Checkbox } from "./ui/checkbox";
+import { Checkbox } from "./checkbox";
 import { useState } from "react";
 
 import { Step } from "~/lib/features/step/stepSlice";

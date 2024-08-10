@@ -1,0 +1,42 @@
+## tasks
+
+- [x] tailwind
+- [x] env gitignore
+- [x] git
+- [x] mock data
+- [x] react router
+- [x] goal card
+- [x] basic ui
+- [x] steps scroll
+- [x] modal
+- [x] toggle step
+- [x] create task
+- [x] create step
+- [x] delete step
+- [x] delete task
+- [x] limit amount of tasks and steps
+- [x] task steps input limitations
+- [x] current task state
+- [x] clerk
+- [x] user to table
+- [x] update routes for user
+- [x] delete user button
+- [x] reset state on user signout
+- [x] toaster for user delete
+- [] fix after delete going to normal page instead of login
+- [x] card task ui
+- [x] card modal ui
+- [x] create task ui
+- [x] fix edit
+- [x] fix delete step
+- [x] fix step toggle
+- [x] scale card ui animation
+- [] mobile
+- [] localstorage and sync
+- []
+- []
+- []
+- []
+- []
+- []
+- []

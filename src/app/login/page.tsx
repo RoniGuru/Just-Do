@@ -7,11 +7,12 @@ import { useEffect } from "react";
 type Props = {};
 
 export default function LogIn({}: Props) {
-  const { userId } = useAuth();
+  const { isSignedIn } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (userId) {
+    console.log("signed in", isSignedIn);
+    if (isSignedIn) {
       router.push("/");
     }
   });

@@ -2,17 +2,17 @@
 
 import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
-import StepCheck from "~/app/_components/StepCheck";
-import CreateTaskForm from "./CreateTaskForm";
+
+import CreateTaskForm from "./ui/CreateTaskForm";
 
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 import { fetchTasks } from "../../lib/features/task/taskSlice";
 import { fetchSteps } from "~/lib/features/step/stepSlice";
 
-import { setCurrentTask } from "~/lib/features/currentTask/currentTaskSlice";
-
 import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
+
+import TaskCard from "./ui/TaskCard";
 
 const HomePageClient = () => {
   const dispatch = useAppDispatch();
@@ -37,26 +37,10 @@ const HomePageClient = () => {
     <div>
       <div className="wrap h-100 flex flex-row justify-center gap-4 overflow-hidden p-4 py-16">
         {tasks?.map((task) => (
-          <div
-            className="h-96 w-64 rounded-lg bg-white p-4 shadow-md duration-150 ease-out hover:scale-110"
-            onClick={() => {
-              dispatch(setCurrentTask(task));
-            }}
-            key={task.id}
-          >
-            <h1 className="h-12 overflow-hidden text-lg font-bold">
-              {task.name}
-            </h1>
-            <div className="custom-scrollbar my-4 flex max-h-64 flex-col justify-start gap-2 overflow-y-auto">
-              {steps
-                .filter((step) => step.taskId === task.id)
-                .map((step) => (
-                  <div className="flex items-center gap-2" key={step.id}>
-                    <StepCheck step={step} />
-                  </div>
-                ))}
-            </div>
-          </div>
+          <TaskCard
+            task={task}
+            steps={steps.filter((step) => step.taskId === task.id)}
+          />
         ))}
       </div>
       <div className="m-16 flex justify-center">
