@@ -9,7 +9,6 @@ const CreateTaskForm = ({ tasksLength }: { tasksLength: number }) => {
   const [name, setName] = useState("");
 
   function handleCreateTask() {
-    console.log(tasksLength);
     if (name.length === 0 || name.length > 15) {
       alert("name cannot be empty or longer than 15 characters");
       return;

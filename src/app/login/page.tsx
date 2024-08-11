@@ -11,10 +11,9 @@ export default function LogIn({}: Props) {
   const router = useRouter();
 
   useEffect(() => {
-    console.log("signed in", isSignedIn);
     if (isSignedIn) {
       router.push("/");
     }
-  });
+  }, []);
   return <div>Please Log in </div>;
 }

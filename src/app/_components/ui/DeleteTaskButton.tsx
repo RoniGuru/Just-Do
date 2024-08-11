@@ -13,7 +13,10 @@ const DeleteTaskButton = ({ id, name }: { id: number; name: string }) => {
     dispatch(setCurrentTaskNull());
   }
   return (
-    <button className="rounded border border-red-700 bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700">
+    <button
+      className="rounded border border-red-700 bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700"
+      onClick={handleTaskDelete}
+    >
       Delete {name}
     </button>
   );

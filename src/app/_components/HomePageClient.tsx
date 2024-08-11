@@ -20,14 +20,13 @@ const HomePageClient = () => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(isSignedIn);
     if (isSignedIn) {
       dispatch(fetchTasks());
       dispatch(fetchSteps());
     } else {
       router.push("/login");
     }
-  }, []);
+  }, [isSignedIn]);
 
   const tasks = useAppSelector((state) => state.task.tasks);
   const steps = useAppSelector((state) => state.step.steps);
@@ -40,6 +39,7 @@ const HomePageClient = () => {
           <TaskCard
             task={task}
             steps={steps.filter((step) => step.taskId === task.id)}
+            key={task.id}
           />
         ))}
       </div>

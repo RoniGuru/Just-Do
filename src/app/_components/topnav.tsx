@@ -3,7 +3,7 @@ import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { CgDanger } from "react-icons/cg";
 import axios from "axios";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+
 import { useAuth } from "@clerk/nextjs";
 
 async function deleteUser() {
@@ -15,7 +15,6 @@ async function deleteUser() {
 }
 
 export function TopNav() {
-  const router = useRouter();
   const { signOut } = useAuth();
 
   return (
@@ -43,15 +42,6 @@ export function TopNav() {
                       signOut();
                     });
                   }
-                }}
-              />
-              <UserButton.Action
-                label="refresh"
-                labelIcon={<CgDanger size={18} className="center" />}
-                onClick={() => {
-                  signOut();
-                  router.push("/login");
-                  window.location.reload();
                 }}
               />
             </UserButton.MenuItems>

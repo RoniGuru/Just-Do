@@ -28,7 +28,7 @@ const CreateStepForm = ({ taskId, stepsLength }: props) => {
     <div className="flex flex-col items-center justify-center gap-2">
       <input
         type="text"
-        placeholder="task name"
+        placeholder="step name"
         value={name}
         className="border border-black p-2"
         onChange={(e) => setName(e.target.value)}

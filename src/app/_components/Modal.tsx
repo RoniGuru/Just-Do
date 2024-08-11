@@ -40,7 +40,6 @@ const Modal = ({ task }: props) => {
 
   const handleEdit = () => {
     setIsEditing(true);
-    console.log("editing");
   };
 
   const handleSave = async () => {
@@ -48,7 +47,6 @@ const Modal = ({ task }: props) => {
       return;
     }
     try {
-      console.log("saved");
       setIsEditing(false);
       if (name.length === 0 || name.length > 15) {
         alert("name cannot be empty or longer than 15 characters");
