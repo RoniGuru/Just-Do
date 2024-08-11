@@ -14,9 +14,9 @@ function StepCheck({ step }: StepProps) {
   const id = step.id;
   const toggle = step.isCompleted;
 
-  const handleToggle = () => {
+  const handleToggle = async () => {
     try {
-      dispatch(toggleStep({ id, toggle }));
+      await dispatch(toggleStep({ id, toggle }));
     } catch (error) {
       console.error("Failed to toggle step", error);
     }

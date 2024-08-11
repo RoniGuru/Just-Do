@@ -22,8 +22,8 @@ const stepSlice = createSlice({
   name: "steps",
   initialState,
   reducers: {
-    deleteStepsByTaskId: (state, action) => {
-      const { id } = action.payload;
+    deleteStepsByTaskId: (state, action: PayloadAction<number>) => {
+      const id = action.payload;
       state.steps.filter((step) => step.taskId === id);
     },
     emptySteps: (state) => {

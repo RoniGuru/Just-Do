@@ -4,7 +4,13 @@ import { tasksTable, stepsTable } from "~/server/schema";
 import { eq, and } from "drizzle-orm";
 import { auth } from "@clerk/nextjs/server";
 
-export async function DELETE(req: Request, context: any) {
+interface Context {
+  params: {
+    id: number;
+  };
+}
+
+export async function DELETE(req: Request, context: Context) {
   const user = auth();
   if (!user.userId)
     return NextResponse.json({ error: "unauthorized access" }, { status: 401 });
@@ -21,7 +27,7 @@ export async function DELETE(req: Request, context: any) {
       .where(and(eq(tasksTable.id, id), eq(tasksTable.userId, user.userId)));
 
     return NextResponse.json({ id: id });
-  } catch (error: Error | any) {
+  } catch (error) {
     return NextResponse.json(
       { error: "Failed to delete task" },
       { status: 500 },
@@ -29,7 +35,7 @@ export async function DELETE(req: Request, context: any) {
   }
 }
 
-export async function PUT(req: Request, context: any) {
+export async function PUT(req: Request, context: Context) {
   const user = auth();
   if (!user.userId)
     return NextResponse.json({ error: "unauthorized access" }, { status: 401 });

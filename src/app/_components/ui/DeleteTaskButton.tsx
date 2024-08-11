@@ -7,10 +7,10 @@ import { setCurrentTaskNull } from "~/lib/features/currentTask/currentTaskSlice"
 const DeleteTaskButton = ({ id, name }: { id: number; name: string }) => {
   const dispatch = useAppDispatch();
 
-  function handleTaskDelete() {
+  async function handleTaskDelete() {
     try {
       dispatch(deleteStepsByTaskId(id));
-      dispatch(deleteTask(id));
+      await dispatch(deleteTask(id));
       dispatch(setCurrentTaskNull());
     } catch (error) {
       console.error("Failed to handle Task Delete", error);

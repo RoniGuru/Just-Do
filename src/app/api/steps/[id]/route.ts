@@ -22,7 +22,7 @@ export async function DELETE(req: Request, context: Context) {
       .where(and(eq(stepsTable.id, id), eq(stepsTable.userId, user.userId)));
 
     return NextResponse.json({ id: id });
-  } catch (error: Error | any) {
+  } catch (error) {
     return NextResponse.json(
       { error: "Failed to create step" },
       { status: 500 },

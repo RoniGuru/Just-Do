@@ -38,9 +38,9 @@ export function TopNav() {
                   if (userConfirmed) {
                     toast("deleting", { duration: Infinity, id: "deleting" });
                     await deleteUser()
-                      .then(() => {
+                      .then(async () => {
                         toast.dismiss("deleting");
-                        signOut();
+                        await signOut();
                       })
                       .catch((error: Error) => console.log(error));
                   }

@@ -53,7 +53,9 @@ export const editTaskName = createAsyncThunk<
   Task,
   { id: number; name: string }
 >("tasks/editTaskName", async ({ id, name }) => {
-  const response = await axios.put(`/api/tasks/${id}`, { name });
+  const response = await axios.put<{ task: Task }>(`/api/tasks/${id}`, {
+    name,
+  });
 
   return response.data.task;
 });
