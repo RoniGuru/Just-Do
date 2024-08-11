@@ -20,7 +20,11 @@ const CreateStepForm = ({ taskId, stepsLength }: props) => {
     if (stepsLength >= 5) {
       alert("task can only have 5 steps");
     } else {
-      dispatch(createStep({ name, taskId }));
+      try {
+        dispatch(createStep({ name, taskId }));
+      } catch (error) {
+        console.error("Failed to create step:", error);
+      }
       setName("");
     }
   }

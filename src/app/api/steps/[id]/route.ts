@@ -4,7 +4,13 @@ import { stepsTable } from "~/server/schema";
 import { eq, and } from "drizzle-orm";
 import { auth } from "@clerk/nextjs/server";
 
-export async function DELETE(req: Request, context: any) {
+interface Context {
+  params: {
+    id: number;
+  };
+}
+
+export async function DELETE(req: Request, context: Context) {
   const user = auth();
   if (!user.userId)
     return NextResponse.json({ error: "unauthorized access" }, { status: 401 });

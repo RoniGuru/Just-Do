@@ -8,8 +8,8 @@ import { useAuth } from "@clerk/nextjs";
 
 async function deleteUser() {
   try {
-    const response = await axios.delete("/api/clerk/delete-user/");
-  } catch (error: Error | any) {
+    await axios.delete("/api/clerk/delete-user/");
+  } catch (error) {
     return Response.json({ error: "Failed to create step" }, { status: 500 });
   }
 }
@@ -37,10 +37,12 @@ export function TopNav() {
                   );
                   if (userConfirmed) {
                     toast("deleting", { duration: Infinity, id: "deleting" });
-                    deleteUser().then(() => {
-                      toast.dismiss("deleting");
-                      signOut();
-                    });
+                    deleteUser()
+                      .then(() => {
+                        toast.dismiss("deleting");
+                        signOut();
+                      })
+                      .catch((error: Error) => console.log(error));
                   }
                 }}
               />

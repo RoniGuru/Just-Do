@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Modal from "./Modal";
 
 import CreateTaskForm from "./ui/CreateTaskForm";
@@ -21,8 +21,12 @@ const HomePageClient = () => {
 
   useEffect(() => {
     if (isSignedIn) {
-      dispatch(fetchTasks());
-      dispatch(fetchSteps());
+      try {
+        void dispatch(fetchTasks());
+        void dispatch(fetchSteps());
+      } catch (error) {
+        console.error("Failed to fetch tasks and steps", error);
+      }
     } else {
       router.push("/login");
     }

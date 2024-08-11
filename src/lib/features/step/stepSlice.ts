@@ -32,25 +32,25 @@ const stepSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchSteps.fulfilled, (state, action) => {
+      .addCase(fetchSteps.fulfilled, (state, action: PayloadAction<Step[]>) => {
         state.steps = action.payload;
       })
-      .addCase(toggleStep.fulfilled, (state, action) => {
+      .addCase(toggleStep.fulfilled, (state, action: PayloadAction<Step>) => {
         const index = state.steps.findIndex(
-          (step) => step.id === action.payload.step.id,
+          (step) => step.id === action.payload.id,
         );
 
         if (index !== -1) {
-          state.steps[index] = action.payload.step;
+          state.steps[index] = action.payload;
         }
       })
-      .addCase(createStep.fulfilled, (state, action) => {
+      .addCase(createStep.fulfilled, (state, action: PayloadAction<Step>) => {
         const newStep = action.payload;
 
         state.steps.push(newStep);
       })
-      .addCase(deleteStep.fulfilled, (state, action) => {
-        const { id } = action.payload;
+      .addCase(deleteStep.fulfilled, (state, action: PayloadAction<number>) => {
+        const id = action.payload;
 
         const index = state.steps.findIndex((step) => step.id === Number(id));
 
@@ -73,7 +73,7 @@ export const toggleStep = createAsyncThunk(
   "steps/toggleStep",
   async ({ id, toggle }: { id: number; toggle: boolean }) => {
     const response = await axios.put("/api/steps/", { id, toggle });
-    return response.data;
+    return response.data.step;
   },
 );
 
@@ -82,7 +82,7 @@ export const deleteStep = createAsyncThunk(
   async (id: number) => {
     const response = await axios.delete(`/api/steps/${id}`);
 
-    return response.data;
+    return response.data.id;
   },
 );
 

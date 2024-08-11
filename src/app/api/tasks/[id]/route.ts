@@ -35,8 +35,8 @@ export async function PUT(req: Request, context: any) {
     return NextResponse.json({ error: "unauthorized access" }, { status: 401 });
 
   try {
-    const { id } = context.params;
-    const { name } = await req.json();
+    const { id }: { id: number } = context.params;
+    const { name }: { name: string } = await req.json();
 
     const task = await db
       .update(tasksTable)
@@ -45,7 +45,7 @@ export async function PUT(req: Request, context: any) {
       .returning();
 
     return NextResponse.json({ task: task[0] });
-  } catch (error: Error | any) {
+  } catch (error) {
     return NextResponse.json({ error: "Failed to edit task" }, { status: 500 });
   }
 }

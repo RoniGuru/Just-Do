@@ -8,9 +8,13 @@ const DeleteTaskButton = ({ id, name }: { id: number; name: string }) => {
   const dispatch = useAppDispatch();
 
   function handleTaskDelete() {
-    dispatch(deleteStepsByTaskId(id));
-    dispatch(deleteTask(id));
-    dispatch(setCurrentTaskNull());
+    try {
+      dispatch(deleteStepsByTaskId(id));
+      dispatch(deleteTask(id));
+      dispatch(setCurrentTaskNull());
+    } catch (error) {
+      console.error("Failed to handle Task Delete", error);
+    }
   }
   return (
     <button

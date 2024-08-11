@@ -1,7 +1,7 @@
 import { Step } from "~/lib/features/step/stepSlice";
 import { Task } from "~/lib/features/task/taskSlice";
 import StepCheck from "./StepCheck";
-import { useAppDispatch, useAppSelector } from "~/lib/hooks";
+import { useAppDispatch } from "~/lib/hooks";
 import { setCurrentTask } from "~/lib/features/currentTask/currentTaskSlice";
 
 const TaskCard = ({ task, steps }: { task: Task; steps: Step[] }) => {

@@ -4,9 +4,7 @@ import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-type Props = {};
-
-export default function LogIn({}: Props) {
+export default function LogIn() {
   const { isSignedIn } = useAuth();
   const router = useRouter();
 

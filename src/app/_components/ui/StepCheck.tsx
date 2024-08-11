@@ -1,9 +1,8 @@
 "use client";
 import { Checkbox } from "./checkbox";
-import { useState } from "react";
 
 import { Step } from "~/lib/features/step/stepSlice";
-import { useAppDispatch, useAppSelector } from "~/lib/hooks";
+import { useAppDispatch } from "~/lib/hooks";
 import { toggleStep } from "~/lib/features/step/stepSlice";
 
 interface StepProps {
@@ -16,7 +15,11 @@ function StepCheck({ step }: StepProps) {
   const toggle = step.isCompleted;
 
   const handleToggle = () => {
-    dispatch(toggleStep({ id, toggle }));
+    try {
+      dispatch(toggleStep({ id, toggle }));
+    } catch (error) {
+      console.error("Failed to toggle step", error);
+    }
   };
 
   return (

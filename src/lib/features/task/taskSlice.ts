@@ -54,7 +54,7 @@ export const editTaskName = createAsyncThunk(
   async ({ id, name }: { id: number; name: string }) => {
     const response = await axios.put(`/api/tasks/${id}`, { name: name });
 
-    return response.data;
+    return response.data.task;
   },
 );
 
@@ -69,26 +69,26 @@ const taskSlice = createSlice({
   extraReducers: (builder) => {
     builder
 
-      .addCase(fetchTasks.fulfilled, (state, action) => {
+      .addCase(fetchTasks.fulfilled, (state, action: PayloadAction<Task[]>) => {
         state.tasks = action.payload;
       })
 
-      .addCase(createTask.fulfilled, (state, action) => {
+      .addCase(createTask.fulfilled, (state, action: PayloadAction<Task>) => {
         const newTask = action.payload;
         state.tasks.push(newTask);
       })
-      .addCase(deleteTask.fulfilled, (state, action) => {
+      .addCase(deleteTask.fulfilled, (state, action: PayloadAction<number>) => {
         const id = action.payload;
 
         state.tasks.splice(state.tasks.findIndex((task) => task.id === id));
       })
-      .addCase(editTaskName.fulfilled, (state, action) => {
+      .addCase(editTaskName.fulfilled, (state, action: PayloadAction<Task>) => {
         const index = state.tasks.findIndex(
-          (task) => task.id === action.payload.task.id,
+          (task) => task.id === action.payload.id,
         );
 
         if (index !== -1) {
-          state.tasks[index] = action.payload.task;
+          state.tasks[index] = action.payload;
         }
       });
   },

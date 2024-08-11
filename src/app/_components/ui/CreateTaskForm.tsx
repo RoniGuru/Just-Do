@@ -17,8 +17,11 @@ const CreateTaskForm = ({ tasksLength }: { tasksLength: number }) => {
       alert("over task limit of 5");
       setName("");
     } else {
-      dispatch(createTask(name));
-      setName("");
+      try {
+        dispatch(createTask(name));
+      } catch (error) {
+        console.error("Failed to create task:", error);
+      }
     }
   }
   return (
