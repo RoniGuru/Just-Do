@@ -35,13 +35,17 @@ const HomePageClient = () => {
   return (
     <div>
       <div className="wrap h-100 flex flex-row justify-center gap-4 overflow-hidden p-4 py-16">
-        {tasks?.map((task) => (
-          <TaskCard
-            task={task}
-            steps={steps.filter((step) => step.taskId === task.id)}
-            key={task.id}
-          />
-        ))}
+        {tasks.length != 0 ? (
+          tasks.map((task) => (
+            <TaskCard
+              task={task}
+              steps={steps.filter((step) => step.taskId === task.id)}
+              key={task.id}
+            />
+          ))
+        ) : (
+          <div className="h-96"></div>
+        )}
       </div>
       <div className="m-16 flex justify-center">
         <CreateTaskForm tasksLength={tasks.length} />

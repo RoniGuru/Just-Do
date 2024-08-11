@@ -12,9 +12,13 @@ dialog {
 }
 
 .background {
-  background-color: #35654d;
+  background-color: #36454f;
 }
 
 .navBg {
-  background-color: #42370f;
+  background-color: #3b82f6;
+}
+
+.cl-userButtonBox {
+  scale: 1.5;
 }

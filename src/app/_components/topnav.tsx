@@ -19,7 +19,7 @@ export function TopNav() {
 
   return (
     <nav className="navBg flex w-full items-center justify-between p-4 text-xl font-semibold">
-      <div>JustDo</div>
+      <div className="text-2xl font-bold text-white">JustDo</div>
 
       <div className="flex flex-row items-center gap-4">
         <SignedOut>

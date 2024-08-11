@@ -23,7 +23,8 @@
 - [x] delete user button
 - [x] reset state on user signout
 - [x] toaster for user delete
-- [] fix after delete going to normal page instead of login
+- [x] fix after delete going to normal page instead of login
+- [x] after sign out goes to normal page
 - [x] card task ui
 - [x] card modal ui
 - [x] create task ui
@@ -31,6 +32,8 @@
 - [x] fix delete step
 - [x] fix step toggle
 - [x] scale card ui animation
+- [] make task not be toggled unless modal
+- [] push to vercel
 - [] mobile
 - [] localstorage and sync
 - []
