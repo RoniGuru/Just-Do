@@ -12,10 +12,7 @@ import DeleteTaskButton from "./ui/DeleteTaskButton";
 import { useState } from "react";
 import { editTaskName } from "../../lib/features/task/taskSlice";
 
-import {
-  setCurrentTaskNull,
-  setCurrentTask,
-} from "~/lib/features/currentTask/currentTaskSlice";
+import { setCurrentTaskNull } from "~/lib/features/currentTask/currentTaskSlice";
 
 interface props {
   task: Task;
@@ -87,11 +84,11 @@ const Modal = ({ task }: props) => {
                 type="text"
                 value={name ? name : task.name}
                 onChange={(e) => setName(e.target.value)}
-                onBlur={() => {
+                onBlur={async () => {
                   if (name === task.name) {
                     setIsEditing(false);
                   } else {
-                    handleSave();
+                    await handleSave();
                   }
                 }}
                 className="block w-2/3 border-2 border-black text-3xl font-bold leading-tight text-gray-900 focus:outline-none focus:ring-0"
