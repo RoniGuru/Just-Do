@@ -1,7 +1,7 @@
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { db } from "~/server/db";
-import { eq, and } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { tasksTable, stepsTable } from "~/server/schema";
 export async function DELETE() {
   const user = auth();

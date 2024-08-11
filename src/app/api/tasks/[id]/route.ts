@@ -10,7 +10,7 @@ export async function DELETE(req: Request, context: any) {
     return NextResponse.json({ error: "unauthorized access" }, { status: 401 });
 
   try {
-    const { id } = context.params;
+    const { id } = context.params as { id: number };
     await db
       .delete(stepsTable)
       .where(
@@ -35,8 +35,8 @@ export async function PUT(req: Request, context: any) {
     return NextResponse.json({ error: "unauthorized access" }, { status: 401 });
 
   try {
-    const { id }: { id: number } = context.params;
-    const { name }: { name: string } = await req.json();
+    const { id } = context.params as { id: number };
+    const { name } = (await req.json()) as { name: string };
 
     const task = await db
       .update(tasksTable)
@@ -46,6 +46,7 @@ export async function PUT(req: Request, context: any) {
 
     return NextResponse.json({ task: task[0] });
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ error: "Failed to edit task" }, { status: 500 });
   }
 }

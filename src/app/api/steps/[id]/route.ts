@@ -15,7 +15,7 @@ export async function DELETE(req: Request, context: Context) {
   if (!user.userId)
     return NextResponse.json({ error: "unauthorized access" }, { status: 401 });
   try {
-    const { id } = context.params;
+    const { id } = context.params as { id: number };
 
     await db
       .delete(stepsTable)

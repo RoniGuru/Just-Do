@@ -29,8 +29,10 @@ export async function PUT(request: Request) {
     return NextResponse.json({ error: "unauthorized access" }, { status: 401 });
 
   try {
-    const { id, toggle }: { id: number; toggle: boolean } =
-      await request.json();
+    const { id, toggle } = (await request.json()) as {
+      id: number;
+      toggle: boolean;
+    };
     const step = await db
       .update(stepsTable)
       .set({ isCompleted: !toggle })
@@ -43,13 +45,16 @@ export async function PUT(request: Request) {
   }
 }
 
-export async function POST(req: Request) {
+export async function POST(request: Request) {
   const user = auth();
   if (!user.userId)
     return NextResponse.json({ error: "unauthorized access" }, { status: 401 });
 
   try {
-    const { name, taskId }: { name: string; taskId: number } = await req.json();
+    const { name, taskId } = (await request.json()) as {
+      name: string;
+      taskId: number;
+    };
     const newStep = await db
       .insert(stepsTable)
       .values({

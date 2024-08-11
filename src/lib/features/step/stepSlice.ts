@@ -64,35 +64,41 @@ const stepSlice = createSlice({
 export const fetchSteps = createAsyncThunk<Step[]>(
   "steps/fetchSteps",
   async () => {
-    const response = await axios.get("/api/steps/");
+    const response = await axios.get<Step[]>("/api/steps/");
     return response.data;
   },
 );
 
-export const toggleStep = createAsyncThunk(
-  "steps/toggleStep",
-  async ({ id, toggle }: { id: number; toggle: boolean }) => {
-    const response = await axios.put("/api/steps/", { id, toggle });
-    return response.data.step;
-  },
-);
+export const toggleStep = createAsyncThunk<
+  Step,
+  { id: number; toggle: boolean }
+>("steps/toggleStep", async ({ id, toggle }) => {
+  const response = await axios.put<{ step: Step }>("/api/steps/", {
+    id,
+    toggle,
+  });
+  return response.data.step;
+});
 
-export const deleteStep = createAsyncThunk(
+export const deleteStep = createAsyncThunk<number, number>(
   "steps/deleteStep",
-  async (id: number) => {
-    const response = await axios.delete(`/api/steps/${id}`);
+  async (id) => {
+    const response = await axios.delete<{ id: number }>(`/api/steps/${id}`);
 
     return response.data.id;
   },
 );
 
-export const createStep = createAsyncThunk(
-  "steps/createSteps",
-  async ({ name, taskId }: { name: string; taskId: number }) => {
-    const response = await axios.post("/api/steps/", { name, taskId });
-    return response.data.step;
-  },
-);
+export const createStep = createAsyncThunk<
+  Step,
+  { name: string; taskId: number }
+>("steps/createSteps", async ({ name, taskId }) => {
+  const response = await axios.post<{ step: Step }>("/api/steps/", {
+    name,
+    taskId,
+  });
+  return response.data.step;
+});
 
 export const { deleteStepsByTaskId, emptySteps } = stepSlice.actions;
 export default stepSlice.reducer;

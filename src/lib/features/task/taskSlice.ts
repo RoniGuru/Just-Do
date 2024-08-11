@@ -27,7 +27,7 @@ const initialState: TaskState = {
 export const fetchTasks = createAsyncThunk<Task[]>(
   "tasks/fetchTasks",
   async () => {
-    const response = await axios.get("/api/tasks/");
+    const response = await axios.get<Task[]>("/api/tasks/");
     return response.data;
   },
 );
@@ -35,28 +35,28 @@ export const fetchTasks = createAsyncThunk<Task[]>(
 export const createTask = createAsyncThunk<Task, string>(
   "tasks/createTask",
   async (name) => {
-    const response = await axios.post("/api/tasks", { name });
+    const response = await axios.post<{ task: Task }>("/api/tasks", { name });
     return response.data.task;
   },
 );
 
-export const deleteTask = createAsyncThunk(
+export const deleteTask = createAsyncThunk<number, number>(
   "tasks/deleteTask",
-  async (id: number) => {
-    const response = await axios.delete(`/api/tasks/${id}`);
+  async (id) => {
+    const response = await axios.delete<{ id: number }>(`/api/tasks/${id}`);
 
     return response.data.id;
   },
 );
 
-export const editTaskName = createAsyncThunk(
-  "tasks/editTaskName",
-  async ({ id, name }: { id: number; name: string }) => {
-    const response = await axios.put(`/api/tasks/${id}`, { name: name });
+export const editTaskName = createAsyncThunk<
+  Task,
+  { id: number; name: string }
+>("tasks/editTaskName", async ({ id, name }) => {
+  const response = await axios.put(`/api/tasks/${id}`, { name });
 
-    return response.data.task;
-  },
-);
+  return response.data.task;
+});
 
 const taskSlice = createSlice({
   name: "tasks",
@@ -75,12 +75,17 @@ const taskSlice = createSlice({
 
       .addCase(createTask.fulfilled, (state, action: PayloadAction<Task>) => {
         const newTask = action.payload;
+        console.log("task", action.payload);
         state.tasks.push(newTask);
       })
       .addCase(deleteTask.fulfilled, (state, action: PayloadAction<number>) => {
         const id = action.payload;
 
-        state.tasks.splice(state.tasks.findIndex((task) => task.id === id));
+        const index = state.tasks.findIndex((task) => task.id === Number(id));
+
+        if (index !== -1) {
+          state.tasks.splice(index, 1);
+        }
       })
       .addCase(editTaskName.fulfilled, (state, action: PayloadAction<Task>) => {
         const index = state.tasks.findIndex(

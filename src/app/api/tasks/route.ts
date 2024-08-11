@@ -28,7 +28,7 @@ export async function POST(req: Request) {
   if (!user.userId)
     return NextResponse.json({ error: "unauthorized access" }, { status: 401 });
   try {
-    const { name }: { name: string } = await req.json();
+    const { name } = (await req.json()) as { name: string };
     const newTask = await db
       .insert(tasksTable)
       .values({

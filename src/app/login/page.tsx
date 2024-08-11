@@ -13,5 +13,9 @@ export default function LogIn() {
       router.push("/");
     }
   }, []);
-  return <div>Please Log in </div>;
+  return (
+    <div className="flex h-96 items-center justify-center text-2xl font-bold text-white">
+      Please Log in{" "}
+    </div>
+  );
 }

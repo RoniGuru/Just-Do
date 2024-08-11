@@ -8,7 +8,7 @@ const CreateTaskForm = ({ tasksLength }: { tasksLength: number }) => {
   const dispatch = useAppDispatch();
   const [name, setName] = useState("");
 
-  function handleCreateTask() {
+  async function handleCreateTask() {
     if (name.length === 0 || name.length > 15) {
       alert("name cannot be empty or longer than 15 characters");
       return;
@@ -18,7 +18,7 @@ const CreateTaskForm = ({ tasksLength }: { tasksLength: number }) => {
       setName("");
     } else {
       try {
-        dispatch(createTask(name));
+        await dispatch(createTask(name));
       } catch (error) {
         console.error("Failed to create task:", error);
       }

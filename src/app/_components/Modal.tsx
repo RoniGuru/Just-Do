@@ -56,7 +56,7 @@ const Modal = ({ task }: props) => {
       task.name === name;
       setName("");
 
-      dispatch(editTaskName({ id, name }));
+      await dispatch(editTaskName({ id, name }));
       dispatch(setCurrentTaskNull());
     } catch (error) {
       console.error("Failed to update task", error);

@@ -31,13 +31,13 @@ export function TopNav() {
               <UserButton.Action
                 label="Delete User"
                 labelIcon={<CgDanger size={18} className="center" />}
-                onClick={() => {
+                onClick={async () => {
                   const userConfirmed = window.confirm(
                     "Do you want to delete this account and all its data",
                   );
                   if (userConfirmed) {
                     toast("deleting", { duration: Infinity, id: "deleting" });
-                    deleteUser()
+                    await deleteUser()
                       .then(() => {
                         toast.dismiss("deleting");
                         signOut();
