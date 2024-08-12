@@ -21,7 +21,7 @@ export function TopNav() {
     <nav className="navBg flex w-full items-center justify-between p-4 text-xl font-semibold">
       <div className="text-2xl font-bold text-white">JustDo</div>
 
-      <div className="flex flex-row items-center gap-4">
+      <div className="flex flex-row items-center gap-4 text-white">
         <SignedOut>
           <SignInButton />
         </SignedOut>
